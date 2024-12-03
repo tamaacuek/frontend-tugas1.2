@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+              isabelline: "#f3f2ee",
+              silverfoil: "#b2b0ac",
+              darksilver: "#6f6f6b",
+              raisinblack: "#21211d",
+              chinesewhite: "#ededed",
+              chineseblue: "#21548b",
+              chinesesilver: "#a5a5a5",
+            },
+            fontFamily: {
+              montserrat: "Montserrat",
+            },
+            backgroundImage: {
+              'hero': "url('./bg.jpg')",
+              'kontol': "url('./kontol.jpg')"
+            },
+            boxShadow: {
+              'bayangan': '25px 30px 55px #000',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    </style>
+    <title>Desain Frontend</title>
+  </head>
+  <body
+    class="bg-chinesesilver font-montserrat flex justify-center items-center h-[100vh] w-full bg-blend-multiply bg-cover bg-no-repeat"
+    style="background-image: url('./bg4.jpg');"
+    >
+    <div class="container h-[75%] w-[70%] flex justify-center items-center shadow-bayangan m-10 rounded-xl shadow-bayangan">
+      <div class="atas flex justify-center items-center w-[40%] h-full bg-isabelline text-raisinblack rounded-l-xl ">
+        <div class="wrapper flex justify-center items-center">
+          <div class="inner p-12  mx-5 mb-5 overflow-y-scroll w-full h-full">
+            <!-- Form -->
+            <div class="title mb-5 text-2xl font-bold uppercase text-center">
+              <h2>Form</h2>
+            </div>
+            <form class="myTable flex flex-col justify-center items-center">
+              <p class="">
+                <label></label>
+                <input type="text" id="name" placeholder="Nama" class="mt-3 px-2 py-1 text-raisinblack bg-chinesewhite w-full" />
+              </p>
+              <p class="">
+                <label for=""></label>
+                <input type="number" id="nik" placeholder="NIK" class="mt-3 px-2 py-1 text-raisinblack bg-chinesewhite" />
+              </p>
+              <p class="">
+                <label for=""></label>
+                <input type="email" id="dob" placeholder="Email" class="mt-3 px-2 py-1 text-raisinblack bg-chinesewhite" />
+              </p>
+              <a href="#" class="mt-5">
+                <button type="button" id="save" class=" bg-chineseblue px-6 py-1 rounded-2xl text-isabelline font-semibold hover:bg-chinesesilver uppercase">Simpan</button>
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="bawah" class="flex justify-center items-center w-[60%] h-full text-isabelline bg-chineseblue rounded-r-xl bg-cover overflow-hidden overflow-x-hidden">
+        <div class="inner p-12 rounded-lg mx-5 mb-5 overflow-y-scroll h-[300px]">
+          <div class="title title mb-5 text-2xl font-bold uppercase text-center">
+            <h2>Data</h2>
+          </div>
+          <!-- Data Table -->
+          <table id="myData" class="data border-separate border-spacing-3 [&>td]:border-solid [&>td]:border [&>td]:p-5 [&>th]:border-solid [&>th]:border [&>th]:p-5 [&>tr:nth-child(even)]:text-blue-500 [&>tr:nth-child(even):hover]:bg-[#ddd]">
+            <thead>
+              <tr class="dataRow">
+                <th
+                  class="pt-3 pb-3 text-center bg-transparent"
+                >
+                  ID
+                </th>
+                <th
+                  class="pt-3 pb-3 text-center bg-transparent"
+                >
+                  NAMA
+                </th>
+                <th
+                  class="pt-3 pb-3 text-center bg-transparent"
+                >
+                  NIK
+                </th>
+                <th
+                  class="pt-3 pb-3 text-center bg-transparent"
+                >
+                  Email
+                </th>
+                <th
+                  class="pt-3 pb-3 text-center bg-transparent"
+                >
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody class="align-middle"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Event click untuk tombol Save
+        $("#save").on("click", function () {
+          var nama = $("#name").val(); // Ambil nilai input nama
+          var nik = $("#nik").val(); // Ambil nilai input NIK
+          var dob = $("#dob").val(); // Ambil nilai input NIK
+          var count = $("#myData tbody tr").length + 1; // Hitung jumlah baris data
+
+          if (nama !== "" && nik !== "") {
+            // Tambahkan baris ke tabel
+            $("#myData tbody").append(`
+                <tr>
+                    <td>${count}</td>
+                    <td>${nama}</td>
+                    <td>${nik}</td>
+                    <td>${dob}</td>
+                    <td style="text-align: center; vertical-align: middle;">
+                      <a href="javascript:void(0);" class="remdata">
+                        <i class="fa-solid fa-trash" style="color: #f3f2ee;" 
+                            onmouseover="this.style.color='red'" 
+                            onmouseout="this.style.color='#f3f2ee'">
+                        </i>
+                      </a>
+                    </td>
+                </tr>
+            `);
+            // Reset input form
+            $("#name").val("");
+            $("#nik").val("");
+            $("#dob").val("");
+          } else {
+            alert("Mohon isi semua data!");
+          }
+        });
+
+        // Event click untuk tombol Delete
+        $(document).on("click", ".remdata", function () {
+          $(this).closest("tr").remove(); // Hapus baris
+          // Perbarui nomor ID setelah penghapusan
+          $("#myData tbody tr").each(function (i) {
+            $(this)
+              .find("td:first")
+              .text(i + 1);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
